@@ -1,0 +1,12 @@
+---
+title: "Proyecto II"
+author: "José Donado, Super Ian, Super Joaquín"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
