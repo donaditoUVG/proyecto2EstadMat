@@ -1,6 +1,6 @@
 ---
-title: "Proyecto II"
-author: "José Donado, Super Ian, Super Joaquín"
+title: "Proyecto II - Estadística Matemática"
+author: "José Donado, Ian, Joaquín, Micaela"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
@@ -9,4 +9,75 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+### Problema 1 (17 puntos)
+Suponga que $Y$ es una variable aleatoria que indica la cantidad de líquido despachado por una máquina embotelladora y está distribuida normalmente con $\sigma = 1$ onza. Suponga que $Y$ se calcula usando una muestra de tamaño $n$.
+
+a) Encontrar $P(|Y - \mu| \leq 0.3)$ para $n=9, 16, 25, 36, 49, 64$.  
+b) ¿Qué patrón observa entre los valores de $P(|Y - \mu| \leq 0.3)$ para diferentes valores de $n$?  
+c) ¿Estos resultados del inciso a son consistentes con el resultado obtenido en el ejemplo 7.3?  
+
+```{r}
+
+```
+
+
+### Problema 2 (17 puntos)
+Si $Z_1, Z_2, Z_3, Z_4, Z_5, Z_6$ son una muestra aleatoria de una distribución normal estándar, determine:
+
+\[
+P\left( \sum_{i=1}^{6} Z_i^2 \leq 6 \right).
+\]
+
+```{r}
+
+```
+
+
+### Problema 3 (17 puntos)
+Suponga que $T$ es una variable aleatoria con distribución t.  
+
+a) Calcular el valor de $t_{0.10}$ (esto es, $P(T > t_{0.10})=0.10$) para distribuciones t con $5, 30, 60, 120$ grados de libertad.  
+b) Calcular el valor de $z_{0.10}$. ¿Qué propiedad de la distribución t (cuando se compara con la normal estándar) explica el hecho de que todos los valores obtenidos en el inciso a son mayores que $z_{0.10}$?  
+c) ¿Qué observa sobre los tamaños de los valores de $t_{0.10}$ para distribuciones con $5, 30, 60, 120$ gl? Cuando los gl son grandes, ¿a qué converge $t_{0.10}$?  
+
+
+```{r}
+
+```
+
+
+### Problema 4 (17 puntos)
+Suponga que $Y$ tiene una distribución $F$ con $v_1=4$ gl en el numerador y $v_2=6$ gl en el denominador.  
+
+a) Encontrar $F_{0.025}$ (esto es, $P(F > F_{0.025})=0.025$) y $F_{0.975}$ (esto es, $P(F > F_{0.975})=0.975$).  
+b) Si $U$ tiene una distribución $F$ con $v_1=6$ gl en el numerador y $v_2=4$ en el denominador, encuentre $F_{0.025}$.  
+c) ¿Cuál es la relación entre $F_{0.975}$ (4 gl en numerador y 6 en denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador)?  
+
+```{r}
+
+```
+
+
+### Problema 5 (16 puntos)
+Sea $U$ una variable aleatoria uniforme $(0,1)$ y $Y = -2\ln(U)$.  
+
+Encuentre la función densidad de $Y$, determine qué distribución tiene $Y$ y verifique su respuesta con una simulación en R.  
+
+**Nota:** Genere un millón de números aleatorios uniforme entre $(0,1)$ en R, aplique la función correspondiente para obtener los valores de $Y$, realice un histograma y sobreponga la función densidad encontrada en el diagrama.  
+
+```{r}
+
+```
+
+
+### Problema 6 (16 puntos)
+Sea $U$ una variable aleatoria uniforme $(0,1)$.  
+
+Encuentre la función densidad de $Y = 1 - U$, determine qué distribución tiene $Y$ y verifique su respuesta con una simulación en R.  
+
+**Nota:** Genere un millón de números aleatorios uniforme entre $(0,1)$ en R, aplique la función correspondiente para obtener los valores de $Y$, realice un histograma y sobreponga la función densidad encontrada en el diagrama.  
+
+```{r}
+
+```
+
