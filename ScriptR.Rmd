@@ -1,6 +1,6 @@
 ---
 title: "Proyecto II - Estadística Matemática"
-author: "José Donado, Ian, Joaquín, Micaela"
+author: "José Donado, Ian Castellanos, Joaquín Puente, Micaela Yataz"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
@@ -12,13 +12,41 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Problema 1 (17 puntos)
 Suponga que $Y$ es una variable aleatoria que indica la cantidad de líquido despachado por una máquina embotelladora y está distribuida normalmente con $\sigma = 1$ onza. Suponga que $Y$ se calcula usando una muestra de tamaño $n$.
 
-a) Encontrar $P(|Y - \mu| \leq 0.3)$ para $n=9, 16, 25, 36, 49, 64$.  
-b) ¿Qué patrón observa entre los valores de $P(|Y - \mu| \leq 0.3)$ para diferentes valores de $n$?  
-c) ¿Estos resultados del inciso a son consistentes con el resultado obtenido en el ejemplo 7.3?  
+a) Encontrar $P(|Y - \mu| \leq 0.3)$ para $n=9, 16, 25, 36, 49, 64$.
 
 ```{r}
+# Vector de tamaños de muestra
+n_values <- c(9, 16, 25, 36, 49, 64)
 
+# Desviación estándar poblacional
+sigma <- 1
+delta <- 0.3  # margen
+
+# Función para calcular P(|Y - mu| <= delta)
+calc_prob <- function(n, sigma, delta) {
+  se <- sigma / sqrt(n)  # error estándar
+  z <- delta / se        # valor z
+  prob <- pnorm(z) - pnorm(-z)
+  return(prob)
+}
+
+# Calcular para cada n
+results <- sapply(n_values, function(n) calc_prob(n, sigma, delta))
+
+# Mostrar resultados en una tabla
+data.frame(
+  n = n_values,
+  Probabilidad = round(results, 4)
+)
 ```
+
+b) ¿Qué patrón observa entre los valores de $P(|Y - \mu| \leq 0.3)$ para diferentes valores de $n$?  
+
+***A medida que $n$ crece, la probabilidad aumenta.***
+
+c) ¿Estos resultados del inciso a son consistentes con el resultado obtenido en el ejemplo 7.3?  
+
+***Esto es consistente con el hecho de que, al aumentar $n$ la media muestral se concentra más cerca de $\mu$***
 
 
 ### Problema 2 (17 puntos)
@@ -29,9 +57,24 @@ P\left( \sum_{i=1}^{6} Z_i^2 \leq 6 \right).
 \]
 
 ```{r}
-
+# Exacto con la cdf de chi-cuadrado
+prob_exacta <- pchisq(q = 6, df = 6)
+prob_exacta
 ```
 
+La probabilidad es 0.5768099
+
+```{r}
+# Comprobación por simulación (Monte Carlo)
+set.seed(123)
+B <- 1e6
+Z <- matrix(rnorm(6 * B), ncol = 6)
+S <- rowSums(Z^2)
+prob_sim <- mean(S <= 6)
+c(prob_exacta = prob_exacta, prob_sim = prob_sim, error_abs = abs(prob_sim - prob_exacta))
+```
+
+Para comprobar el resultado se utilizó la simulación por medio de Monte Carlo, y resulto que la probabilidad exacta es de 0.5768099189, y la de la simulación 0.5760140000 con un error absoluto de 0.0007959189. Por lo que la probabilidad es correcta.
 
 ### Problema 3 (17 puntos)
 Suponga que $T$ es una variable aleatoria con distribución t.  
