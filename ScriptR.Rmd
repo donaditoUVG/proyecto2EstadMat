@@ -80,13 +80,40 @@ Para comprobar el resultado se utilizó la simulación por medio de Monte Carlo,
 Suponga que $T$ es una variable aleatoria con distribución t.  
 
 a) Calcular el valor de $t_{0.10}$ (esto es, $P(T > t_{0.10})=0.10$) para distribuciones t con $5, 30, 60, 120$ grados de libertad.  
-b) Calcular el valor de $z_{0.10}$. ¿Qué propiedad de la distribución t (cuando se compara con la normal estándar) explica el hecho de que todos los valores obtenidos en el inciso a son mayores que $z_{0.10}$?  
-c) ¿Qué observa sobre los tamaños de los valores de $t_{0.10}$ para distribuciones con $5, 30, 60, 120$ gl? Cuando los gl son grandes, ¿a qué converge $t_{0.10}$?  
+```{r}
+#Respuesta al inciso t=0.10 y df=5
+df5<-pt(0.10,5)
+#Respuesta al inciso t=0.10 y df=30
+df30<-pt(0.10, 30)
+#Respuesta al inciso t=0.10 y df=60
+df60<-pt(0.10, 60)
+#Respuesta al inciso t=0.10 y df=120
+df120<-pt(0.10, 120)
 
+#Se procede a imprimir las respuestas
+sprintf("El valor de t para 5 grados de libertad es: %f", df5)
+sprintf("El valor de t para 30 grados de libertad es: %f", df30)
+sprintf("El valor de t para 60 grados de libertad es: %f", df60)
+sprintf("El valor de t para 120 grados de libertad es: %f", df120)
+```
+
+b) Calcular el valor de $z_{0.10}$. ¿Qué propiedad de la distribución t (cuando se compara con la normal estándar) explica el hecho de que todos los valores obtenidos en el inciso c) son mayores que $z_{0.10}$?  
 
 ```{r}
-
+#Se calcula el valor de z_{0.10}
+sprintf("El valor de la normal para x=0.10 es : %f", pnorm(0.10,0,1))
 ```
+*Respuesta*
+La razón por la cual todos los valores son menores al de la normal se puede observar en la fórmula de la distribución t:
+$$t=\frac{\bar x-\mu}{\frac{s}{\sqrt{N}}}$$
+donde $\frac{s}{\sqrt{N}}$ es el estimado del error de la diferencia de las medias.
+El hecho que  $\frac{s}{\sqrt{N}}>\sigma$ es lo que provoca que los valores sean menores al de $z_{0.10}$
+
+c) ¿Qué observa sobre los tamaños de los valores de $t_{0.10}$ para distribuciones con $5, 30, 60, 120$ gl? Cuando los gl son grandes, ¿a qué converge $t_{0.10}$?  
+
+*Respuesta:*
+
+Al incrementar los grados de libertad en la función $t_{0.10}$, los valores resultantes convergen a $z_{0.10}$
 
 
 ### Problema 4 (17 puntos)
