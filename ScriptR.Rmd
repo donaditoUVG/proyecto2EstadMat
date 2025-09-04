@@ -138,9 +138,9 @@ sprintf("El valor de P(F_{0.025})= %f", Fb)
 
 c) ¿Cuál es la relación entre $F_{0.975}$ (4 gl en numerador y 6 en denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador)?  
 
-```{r}
-
-```
+*Respuesta*
+La relación entre $F_{0.975}$ (4 gl en numerador y 6 en denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador) es:
+$$F_{0.975}(4,6)=\frac{1}{F_{0.025}(6,4)}$$
 
 
 ### Problema 5 (16 puntos)
