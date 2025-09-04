@@ -120,7 +120,22 @@ Al incrementar los grados de libertad en la función $t_{0.10}$, los valores res
 Suponga que $Y$ tiene una distribución $F$ con $v_1=4$ gl en el numerador y $v_2=6$ gl en el denominador.  
 
 a) Encontrar $F_{0.025}$ (esto es, $P(F > F_{0.025})=0.025$) y $F_{0.975}$ (esto es, $P(F > F_{0.975})=0.975$).  
+```{r}
+#P(F>F_{0.025})
+F1<- pf(0.025, 4, 6)
+F2<- pf(0.975, 4, 6)
+sprintf("El valor de P(F>F_{0.025})= %f", F1)
+sprintf("El valor de P(F>F_{0.975}= %f", F2)
+```
+
+
 b) Si $U$ tiene una distribución $F$ con $v_1=6$ gl en el numerador y $v_2=4$ en el denominador, encuentre $F_{0.025}$.  
+
+```{r}
+Fb<- pf(0.025, 6, 4)
+sprintf("El valor de P(F_{0.025})= %f", Fb)
+```
+
 c) ¿Cuál es la relación entre $F_{0.975}$ (4 gl en numerador y 6 en denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador)?  
 
 ```{r}
