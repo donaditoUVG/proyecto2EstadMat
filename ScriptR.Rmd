@@ -3,6 +3,9 @@ title: "Proyecto II - Estadística Matemática"
 author: "José Donado, Ian Castellanos, Joaquín Puente, Micaela Yataz"
 date: "`r Sys.Date()`"
 output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -10,9 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### Problema 1 (17 puntos)
-Suponga que $Y$ es una variable aleatoria que indica la cantidad de líquido despachado por una máquina embotelladora y está distribuida normalmente con $\sigma = 1$ onza. Suponga que $Y$ se calcula usando una muestra de tamaño $n$.
 
-a) Encontrar $P(|Y - \mu| \leq 0.3)$ para $n=9, 16, 25, 36, 49, 64$.
+Suponga que $Y$ es una variable aleatoria que indica la cantidad de
+líquido despachado por una máquina embotelladora y está distribuida
+normalmente con $\sigma = 1$ onza. Suponga que $Y$ se calcula usando una
+muestra de tamaño $n$.
+
+a)  Encontrar $P(|Y - \mu| \leq 0.3)$ para $n=9, 16, 25, 36, 49, 64$.
 
 ```{r}
 # Vector de tamaños de muestra
@@ -40,21 +47,25 @@ data.frame(
 )
 ```
 
-b) ¿Qué patrón observa entre los valores de $P(|Y - \mu| \leq 0.3)$ para diferentes valores de $n$?  
+b)  ¿Qué patrón observa entre los valores de $P(|Y - \mu| \leq 0.3)$
+    para diferentes valores de $n$?
 
-***A medida que $n$ crece, la probabilidad aumenta.***
+***A medida que*** $n$ crece, la probabilidad aumenta.
 
-c) ¿Estos resultados del inciso a son consistentes con el resultado obtenido en el ejemplo 7.3?  
+c)  ¿Estos resultados del inciso a son consistentes con el resultado
+    obtenido en el ejemplo 7.3?
 
-***Esto es consistente con el hecho de que, al aumentar $n$ la media muestral se concentra más cerca de $\mu$***
-
+***Esto es consistente con el hecho de que, al aumentar*** $n$ la media
+muestral se concentra más cerca de $\mu$
 
 ### Problema 2 (17 puntos)
-Si $Z_1, Z_2, Z_3, Z_4, Z_5, Z_6$ son una muestra aleatoria de una distribución normal estándar, determine:
 
-\[
+Si $Z_1, Z_2, Z_3, Z_4, Z_5, Z_6$ son una muestra aleatoria de una
+distribución normal estándar, determine:
+
+$$
 P\left( \sum_{i=1}^{6} Z_i^2 \leq 6 \right).
-\]
+$$
 
 ```{r}
 # Exacto con la cdf de chi-cuadrado
@@ -74,12 +85,18 @@ prob_sim <- mean(S <= 6)
 c(prob_exacta = prob_exacta, prob_sim = prob_sim, error_abs = abs(prob_sim - prob_exacta))
 ```
 
-Para comprobar el resultado se utilizó la simulación por medio de Monte Carlo, y resulto que la probabilidad exacta es de 0.5768099189, y la de la simulación 0.5760140000 con un error absoluto de 0.0007959189. Por lo que la probabilidad es correcta.
+Para comprobar el resultado se utilizó la simulación por medio de Monte
+Carlo, y resulto que la probabilidad exacta es de 0.5768099189, y la de
+la simulación 0.5760140000 con un error absoluto de 0.0007959189. Por lo
+que la probabilidad es correcta.
 
 ### Problema 3 (17 puntos)
-Suponga que $T$ es una variable aleatoria con distribución t.  
 
-a) Calcular el valor de $t_{0.10}$ (esto es, $P(T > t_{0.10})=0.10$) para distribuciones t con $5, 30, 60, 120$ grados de libertad.  
+Suponga que $T$ es una variable aleatoria con distribución t.
+
+a)  Calcular el valor de $t_{0.10}$ (esto es, $P(T > t_{0.10})=0.10$)
+    para distribuciones t con $5, 30, 60, 120$ grados de libertad.\
+
 ```{r}
 #Respuesta al inciso t=0.10 y df=5
 df5<-pt(0.10,5)
@@ -97,29 +114,40 @@ sprintf("El valor de t para 60 grados de libertad es: %f", df60)
 sprintf("El valor de t para 120 grados de libertad es: %f", df120)
 ```
 
-b) Calcular el valor de $z_{0.10}$. ¿Qué propiedad de la distribución t (cuando se compara con la normal estándar) explica el hecho de que todos los valores obtenidos en el inciso c) son mayores que $z_{0.10}$?  
+b)  Calcular el valor de $z_{0.10}$. ¿Qué propiedad de la distribución t
+    (cuando se compara con la normal estándar) explica el hecho de que
+    todos los valores obtenidos en el inciso c) son mayores que
+    $z_{0.10}$?
 
 ```{r}
 #Se calcula el valor de z_{0.10}
 sprintf("El valor de la normal para x=0.10 es : %f", pnorm(0.10,0,1))
 ```
-*Respuesta*
-La razón por la cual todos los valores son menores al de la normal se puede observar en la fórmula de la distribución t:
-$$t=\frac{\bar x-\mu}{\frac{s}{\sqrt{N}}}$$
-donde $\frac{s}{\sqrt{N}}$ es el estimado del error de la diferencia de las medias.
-El hecho que  $\frac{s}{\sqrt{N}}>\sigma$ es lo que provoca que los valores sean menores al de $z_{0.10}$
 
-c) ¿Qué observa sobre los tamaños de los valores de $t_{0.10}$ para distribuciones con $5, 30, 60, 120$ gl? Cuando los gl son grandes, ¿a qué converge $t_{0.10}$?  
+*Respuesta* La razón por la cual todos los valores son menores al de la
+normal se puede observar en la fórmula de la distribución t:
+$$t=\frac{\bar x-\mu}{\frac{s}{\sqrt{N}}}$$ donde $\frac{s}{\sqrt{N}}$
+es el estimado del error de la diferencia de las medias. El hecho que
+$\frac{s}{\sqrt{N}}>\sigma$ es lo que provoca que los valores sean
+menores al de $z_{0.10}$
+
+c)  ¿Qué observa sobre los tamaños de los valores de $t_{0.10}$ para
+    distribuciones con $5, 30, 60, 120$ gl? Cuando los gl son grandes,
+    ¿a qué converge $t_{0.10}$?
 
 *Respuesta:*
 
-Al incrementar los grados de libertad en la función $t_{0.10}$, los valores resultantes convergen a $z_{0.10}$
-
+Al incrementar los grados de libertad en la función $t_{0.10}$, los
+valores resultantes convergen a $z_{0.10}$
 
 ### Problema 4 (17 puntos)
-Suponga que $Y$ tiene una distribución $F$ con $v_1=4$ gl en el numerador y $v_2=6$ gl en el denominador.  
 
-a) Encontrar $F_{0.025}$ (esto es, $P(F > F_{0.025})=0.025$) y $F_{0.975}$ (esto es, $P(F > F_{0.975})=0.975$).  
+Suponga que $Y$ tiene una distribución $F$ con $v_1=4$ gl en el
+numerador y $v_2=6$ gl en el denominador.
+
+a)  Encontrar $F_{0.025}$ (esto es, $P(F > F_{0.025})=0.025$) y
+    $F_{0.975}$ (esto es, $P(F > F_{0.975})=0.975$).\
+
 ```{r}
 #P(F>F_{0.025})
 F1<- pf(0.025, 4, 6)
@@ -128,41 +156,75 @@ sprintf("El valor de P(F>F_{0.025})= %f", F1)
 sprintf("El valor de P(F>F_{0.975}= %f", F2)
 ```
 
-
-b) Si $U$ tiene una distribución $F$ con $v_1=6$ gl en el numerador y $v_2=4$ en el denominador, encuentre $F_{0.025}$.  
+b)  Si $U$ tiene una distribución $F$ con $v_1=6$ gl en el numerador y
+    $v_2=4$ en el denominador, encuentre $F_{0.025}$.
 
 ```{r}
 Fb<- pf(0.025, 6, 4)
 sprintf("El valor de P(F_{0.025})= %f", Fb)
 ```
 
-c) ¿Cuál es la relación entre $F_{0.975}$ (4 gl en numerador y 6 en denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador)?  
+c)  ¿Cuál es la relación entre $F_{0.975}$ (4 gl en numerador y 6 en
+    denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador)?
 
-*Respuesta*
-La relación entre $F_{0.975}$ (4 gl en numerador y 6 en denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador) es:
+*Respuesta* La relación entre $F_{0.975}$ (4 gl en numerador y 6 en
+denominador) y $F_{0.025}$ (6 gl en numerador y 4 en denominador) es:
 $$F_{0.975}(4,6)=\frac{1}{F_{0.025}(6,4)}$$
 
-
 ### Problema 5 (16 puntos)
-Sea $U$ una variable aleatoria uniforme $(0,1)$ y $Y = -2\ln(U)$.  
 
-Encuentre la función densidad de $Y$, determine qué distribución tiene $Y$ y verifique su respuesta con una simulación en R.  
+Sea $U$ una variable aleatoria uniforme $(0,1)$ y $Y = -2\ln(U)$.
 
-**Nota:** Genere un millón de números aleatorios uniforme entre $(0,1)$ en R, aplique la función correspondiente para obtener los valores de $Y$, realice un histograma y sobreponga la función densidad encontrada en el diagrama.  
+Encuentre la función densidad de $Y$, determine qué distribución tiene
+$Y$ y verifique su respuesta con una simulación en R.
+
+**Nota:** Genere un millón de números aleatorios uniforme entre $(0,1)$
+en R, aplique la función correspondiente para obtener los valores de
+$Y$, realice un histograma y sobreponga la función densidad encontrada
+en el diagrama.
 
 ```{r}
 
 ```
-
 
 ### Problema 6 (16 puntos)
-Sea $U$ una variable aleatoria uniforme $(0,1)$.  
 
-Encuentre la función densidad de $Y = 1 - U$, determine qué distribución tiene $Y$ y verifique su respuesta con una simulación en R.  
+Sea $U$ una variable aleatoria uniforme $(0,1)$.
 
-**Nota:** Genere un millón de números aleatorios uniforme entre $(0,1)$ en R, aplique la función correspondiente para obtener los valores de $Y$, realice un histograma y sobreponga la función densidad encontrada en el diagrama.  
+Encuentre la función densidad de $Y = 1 - U$, determine qué distribución
+tiene $Y$ y verifique su respuesta con una simulación en R.
+
+**Nota:** Genere un millón de números aleatorios uniforme entre $(0,1)$
+en R, aplique la función correspondiente para obtener los valores de
+$Y$, realice un histograma y sobreponga la función densidad encontrada
+en el diagrama.
+
+**Respuesta**
+
+Para resolver este problema tradicionalmente se ha de utilizar el método
+de transformación. Sin embargo, aquí comprobaremos esto con una muestra
+de un millón de números reales entre 0 y 1.
 
 ```{r}
+# Semillita (buena práctica)
+set.seed(123)
+
+# Millón de números aleatorios uniformes en (0,1)
+n <- 1e6
+U <- runif(n, 0, 1)
+
+# Transformación de Y = 1 - U
+Y <- 1 - U
+
+# Histograma de Y con su densidad
+hist(Y, probability = TRUE, breaks = 50,
+     col = "lightblue", border = "white",
+     main = "Distribución simulada de Y = 1 - U",
+     xlab = "y")
+
+# Función de densidad teórica 
+curve(dunif(x, 0, 1), add = TRUE, col = "red", lwd = 2)
 
 ```
 
+Nótese que la distribución de Y es la misma que la de U.
