@@ -184,8 +184,28 @@ $Y$, realice un histograma y sobreponga la función densidad encontrada
 en el diagrama.
 
 ```{r}
+# Semillita (buena práctica)
+set.seed(123)
+
+# Millón de números aleatorios uniformes en (0,1)
+n <- 1e6
+U <- runif(n, 0, 1)
+
+# Transformación de Y =  -2*log(U)
+Y <- -2*log(U)
+
+# Histograma de Y con su densidad
+hist(Y, probability = TRUE, breaks = 100,
+     col = "lightblue", border = "white",
+     main = "Distribución simulada de Y =  -2log(U)",
+     xlab = "y")
+
+# Función de densidad teórica 
+curve(dexp(x, rate= 0.5), add = TRUE, col = "red", lwd = 2)
 
 ```
+
+Nótese que a medida que va auentando el número de muestra, en este caso un millón, la distribución de muestra se acerca a la distribución.
 
 ### Problema 6 (16 puntos)
 
@@ -204,6 +224,7 @@ en el diagrama.
 Para resolver este problema tradicionalmente se ha de utilizar el método
 de transformación. Sin embargo, aquí comprobaremos esto con una muestra
 de un millón de números reales entre 0 y 1.
+
 
 ```{r}
 # Semillita (buena práctica)
