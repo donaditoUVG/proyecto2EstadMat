@@ -95,6 +95,28 @@ $$16, 5, 21, 19, 10, 5, 8, 2, 7, 2, 4, 9$$
 Calcule la media real de LC50 para DDT con un coeficiente de confianza $0.90$. Suponga que las mediciones de LC50 tienen una distribución aproximadamente normal.
 
 
+**Respuesta:**
+```{r}
+# Datos
+datos <- c(16, 5, 21, 19, 10, 5, 8, 2, 7, 2, 4, 9)
+
+# Parámetros
+n <- length(datos)
+confianza <- 0.90
+alpha <- 1 - confianza
+# Realizar prueba t (solo para obtener el IC)
+resultado <- t.test(datos, conf.level = confianza)
+
+# Mostrar resultados
+print(resultado)
+
+cat("\nIntervalo de confianza al ", confianza*100, "%:\n", sep = "")
+cat("IC(μ) = [", round(resultado$conf.int[1], 3), ", ", 
+    round(resultado$conf.int[2], 3), "] ppm\n", sep = "")
+
+```
+
+
 ###Problema 6
 
 Se encontrará que, con probabilidad en la cercanía de $0.95$, muchas variables aleatorias observadas en la naturaleza se encuentran a no más de $2$ desviaciones estándar de sus medias
