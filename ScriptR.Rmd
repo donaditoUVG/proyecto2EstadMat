@@ -35,8 +35,7 @@ en el momento de hacer el estudio
 
 ###Problema 2
 
-uponga que Y está distribuida normalmente con media $0$ y va-
-rianza $\sigma^2$ desconocida.
+Suponga que Y está distribuida normalmente con media $0$ y varianza $\sigma^2$ desconocida.
 a) Encuentre la distribución de $Y^2/ \sigma^2$. ¿Por qué?
 b) Hallar un intervalo de confianza del $95\%$ para $\sigma^2$.
 c) Encontrar un límite de confianza superior de $95\%$ para $\sigma^2$.
@@ -64,6 +63,27 @@ f) Como puede observar cero es un valor creíble de la diferencia. ¿Concluiría
 
 Un servicio estatal de fauna silvestre desea calcular el número
 promedio de días que cada cazador con licencia se dedica a esta actividad realmente durante una estación determinada, con un límite en el error de estimación igual a $2$ días de caza. Si los datos recolectados en estudios anteriores han demostrado que s es aproximadamente igual a 10, ¿cuántos cazadores deben estar incluidos en el estudio?
+
+```{r}
+# Función para calcular tamaño de muestra
+calcular_n <- function(sigma, B, confianza = 0.95) {
+  alpha <- 1 - confianza
+  z <- qnorm(1 - alpha/2)
+  n <- (z * sigma / B)^2
+  return(ceiling(n))  # Redondear hacia arriba
+}
+
+# Parámetros del problema
+sigma <- 10
+B <- 2
+
+# Cálculos para diferentes niveles de confianza
+cat("Tamaño de muestra requerido:\n")
+cat("90% confianza:", calcular_n(sigma, B, 0.90), "cazadores\n")
+cat("95% confianza:", calcular_n(sigma, B, 0.95), "cazadores\n")
+cat("99% confianza:", calcular_n(sigma, B, 0.99), "cazadores\n")
+```
+
 
 ###Problema 5
 
