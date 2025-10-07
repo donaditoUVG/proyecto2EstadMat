@@ -46,16 +46,83 @@ d) Hallar un límite de confianza inferior de $95%$ para $\sigma^2$.
 
 Dos marcas de refrigeradores, denotadas por A y B, están garantizadas por 1 año. En una muestra aleatoria de 50 refrigeradores de la marca A, se observó que 12 de ellos fallaron antes de terminar el periodo de garantía. Una muestra aleatoria independiente de 60 refrigeradores de la marca B también reveló 12 fallas durante el período de garantía.
 
+```{r}
+# Datos base
+n1 <- 50; x1 <- 12   # Marca A
+n2 <- 60; x2 <- 12   # Marca B
+
+alpha <- 0.02
+z_crit <- qnorm(1 - alpha/2)  # z_0.99 para 98% de confianza
+
+# Estimadores puntuales
+p1_hat <- x1/n1
+p2_hat <- x2/n2
+diff_hat <- p1_hat - p2_hat
+
+# Error estándar para diferencia de proporciones independientes
+se <- sqrt( p1_hat*(1 - p1_hat)/n1 + p2_hat*(1 - p2_hat)/n2 )
+```
+
 
 a) Calcule la diferencia real $(p_1 - p_2)$ entre las proporciones de fallas durante el período de garantía, con un coeficiente de confianza de aproximadamente .98, donde p1 y p2 se usaron para denotar las proporciones de refrigeradores de las marcas A y B, respectivamente, que fallaron durante los períodos de garantía.
 
+```{r}
+ci_low  <- diff_hat - z_crit*se
+ci_high <- diff_hat + z_crit*se
+
+cat("p1_hat =", round(p1_hat, 4), "\n")
+cat("p2_hat =", round(p2_hat, 4), "\n")
+cat("Diferencia puntual (p1 - p2) =", round(diff_hat, 4), "\n")
+cat("z_crit (98%) =", round(z_crit, 6), "\n")
+cat("SE =", round(se, 6), "\n")
+cat("IC 98% para (p1 - p2): [", round(ci_low, 4), ", ", round(ci_high, 4), "]\n", sep = "")
+
+```
+
+
 b) En el nivel aproximado de $98 \%$ de confianza, ¿cuál es el mayor "valor creíble" para la diferencia en las proporciones de fallas de refrigeradores de las marcas A y B?
+
+```{r}
+upper_98 <- ci_high
+cat("Mayor valor creíble (límite superior 98%):", round(upper_98, 4), "\n")
+```
+
 
 c) En el nivel aproximado de $98 \%$ de confianza, ¿cuál es el menor "valor creíble" para la diferencia en las proporciones de fallas de refrigeradores de las marcas A y B?
 
+```{r}
+lower_98 <- ci_low
+cat("Menor valor creíble (límite inferior 98%):", round(lower_98, 4), "\n")
+
+```
+
+
 d) Si $p_1 - p_2$ es realmente igual a $0.2251$, ¿cuál marca tiene la mayor proporción de fallas durante el período de garantía? ¿Qué tanto más grande?
 
+```{r}
+hyp_diff_d <- 0.2251
+marca_mayor_d <- if (hyp_diff_d > 0) "A" else if (hyp_diff_d < 0) "B" : "Iguales"
+cuanto_mas_d <- abs(hyp_diff_d)
+
+cat("Supuesto p1 - p2 =", hyp_diff_d, "\n")
+cat("Marca con mayor proporción de fallas:", marca_mayor_d, "\n")
+cat("Diferencia absoluta:", round(cuanto_mas_d, 4), " (", round(100*cuanto_mas_d, 2), "% puntos)\n", sep = "")
+
+```
+
+
 e) Si $p_1 - p_2$ es realmente igual a $-0.1451$, ¿cuál marca tiene la mayor proporción de fallas durante el período de garantía? ¿Qué tanto más grande?
+
+```{r}
+hyp_diff_e <- -0.1451
+marca_mayor_e <- if (hyp_diff_e > 0) "A" else if (hyp_diff_e < 0) "B" else "Iguales"
+cuanto_mas_e <- abs(hyp_diff_e)
+
+cat("Supuesto p1 - p2 =", hyp_diff_e, "\n")
+cat("Marca con mayor proporción de fallas:", marca_mayor_e, "\n")
+cat("Diferencia absoluta:", round(cuanto_mas_e, 4), " (", round(100*cuanto_mas_e, 2), "% puntos)\n", sep = "")
+```
+
 
 f) Como puede observar cero es un valor creíble de la diferencia. ¿Concluiría usted que hay evidencia de una diferencia en las proporciones de fallas (dentro del período de garantía) para las dos marcas de refrigeradores? ¿Por qué?
 
