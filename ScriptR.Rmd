@@ -126,6 +126,15 @@ cat("Diferencia absoluta:", round(cuanto_mas_e, 4), " (", round(100*cuanto_mas_e
 
 f) Como puede observar cero es un valor creíble de la diferencia. ¿Concluiría usted que hay evidencia de una diferencia en las proporciones de fallas (dentro del período de garantía) para las dos marcas de refrigeradores? ¿Por qué?
 
+```{r}
+incluye_cero <- (ci_low <= 0) && (0 <= ci_high)
+cat("IC 98%:", "[", round(ci_low, 4), ", ", round(ci_high, 4), "]\n", sep = "")
+cat("¿El IC incluye 0?:", incluye_cero, "\n")
+conclusion <- if (incluye_cero) "No hay evidencia suficiente de diferencia al 98%." else "Sí hay evidencia de diferencia al 98%."
+cat("Conclusión:", conclusion, "\n")
+```
+
+
 ###Problema 4
 
 Un servicio estatal de fauna silvestre desea calcular el número
@@ -189,11 +198,52 @@ cat("IC(μ) = [", round(resultado$conf.int[1], 3), ", ",
 Se encontrará que, con probabilidad en la cercanía de $0.95$, muchas variables aleatorias observadas en la naturaleza se encuentran a no más de $2$ desviaciones estándar de sus medias
 
 a) Calcule la $P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)$, donde Y tiene una distribución Normal con media $\mu$ y varianza $\sigma^2$.
+```{r}
+# Para Normal, estandarizamos: Z = (Y - μ)/σ ~ N(0,1)
+# Entonces P(μ-2σ <= Y <= μ+2σ) = P(-2 <= Z <= 2) = Φ(2) - Φ(-2)
+prob_normal <- pnorm(2) - pnorm(-2)
+prob_normal
+```
+
+
 b) Calcule la $P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)$, donde Y tiene una distribución Uniforme en el intervalo $(a,b)$.
+```{r}
+# Para Uniforme(a,b): μ=(a+b)/2 y σ=(b-a)/sqrt(12)
+# El intervalo μ ± 2σ tiene semiamplitud (b-a)/√3, que es mayor que (b-a)/2.
+# Por lo tanto, cubre completamente [a,b] y la probabilidad es 1.
+prob_uniform <- 1
+prob_uniform
+```
+
+
 c) Calcule la $P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)$, donde Y tiene una distribución exponcial con parámetro $\beta$.
+```{r}
+# Convención: Usamos parámetro β como *escala*: μ=β, σ=β.
+# Entonces μ - 2σ = -β (truncado en 0 porque Y>=0) y μ + 2σ = 3β.
+# P = P(0 <= Y <= 3β) = 1 - exp(-3β/β) = 1 - e^{-3}.
+prob_exp <- 1 - exp(-3)
+prob_exp
+```
+
+
 d) Los incisos anteriores, cumplen la desigualdad de Chebyshef. Explique
+```{r}
+k <- 2
+chebyshev_bound <- 1 - 1/k^2  # 1 - 1/4 = 3/4
+cota_chebyshev <- chebyshev_bound
 
+resumen <- data.frame(
+  Distribucion = c("Normal(μ,σ^2)", "Uniforme(a,b)", "Exponencial(β, escala)"),
+  Prob_dentro_2sigma = c(prob_normal, prob_uniform, prob_exp),
+  Cota_Chebyshev_k2 = rep(cota_chebyshev, 3)
+)
+resumen
+```
 
+La desigualdad de Chebyshev dice, para cualquier v.a. con media y varianza finitas, que
+$$P(|Y-\mu| \leq k\sigma) \geq 1 - \frac{1}{k^2}$$
+
+.
 
 
 
