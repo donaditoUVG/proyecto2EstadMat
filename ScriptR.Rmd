@@ -30,7 +30,29 @@ estados de las Montañas Rocallosas.
 a)  Estime la concentración promedio de calcio en el agua potable para
     pacientes con cálculos renales en las Carolinas. Establezca un
     límite para el error de estimación (2 desviaciones estándar).
+Datos:
+```{r}
+# --- Datos para la Región Carolinas ---
+n1 <- 467                       # Tamaño muestral
+xbar1_calcio <- 11.3            # Promedio de Calcio (ppm)
+s1_calcio <- 16.6               # Desviación Estándar de Calcio
+xbar1_edad <- 45.1              # Promedio de Edad
+s1_edad <- 10.2                 # Desviación Estándar de Edad
+p1_fumadores <- 0.78            # Proporción de Fumadores
 
+# --- Datos para la Región Rocallosas ---
+n2 <- 191                       # Tamaño muestral
+xbar2_edad <- 46.4              # Promedio de Edad
+s2_edad <- 9.8                  # Desviación Estándar de Edad
+p2_fumadores <- 0.61            # Proporción de Fumadores
+
+# --- Valor Crítico (Z) para 2 Errores Estándar ---
+# El valor Z para 2 errores estándar es Z = 2.0. 
+Z <- 2
+```
+    
+    
+**Respuesta:**
 Gracias a que se tiene una muestra grande y el parámetro muestral, se
 puede utilizar el Teorema del Límite Central y la distribución normal
 (Z) para calcular el promedio muestral (puntual) con su correspondiente
@@ -45,12 +67,15 @@ estándar muestral y $n$ es el tamaño de la muestra.
 
 Entonces usaremos la desviación muestral...
 
+
+
 ```{r}
 16.6/(467)^(1/2)
 
 ```
 Con dos desviaciones estándar:
 ```{r}
+#Límite para el Error de Estimación
 (16.6/(467)^(1/2))*2
 
 #Intervalo
@@ -61,14 +86,75 @@ Con dos desviaciones estándar:
 ```
 Por lo tanto, se estima que la concentración promedio de calcio en el agua potable para pacientes con cálculos renales en las Carolina está entre 9.763687 y 12.83631 (ppm).
 
-a)  Calcule la diferencia en edades medias para pacientes con cálculos
-    renales en las Ca- rolinas y en las Rocallosas. Fije un límite para
+b)  Calcule la diferencia en edades medias para pacientes con cálculos
+    renales en las Carolinas y en las Rocallosas. Fije un límite para
     el error de estimación (2 desviaciones estándar).
+La diferencia de medias se calcula al tomar la diferencia de los dos promedios muestrales. Ahora, el error estándar de diferencia de medias 
 
-b)  Calcule y precise un límite de desviación estándar de 2 en la
+Estimador puntual de (miu1 - miu2) es: y1-y2= 45.1-46.4 con su correspondiente estimador puntual de desviación.
+
+```{r}
+# 1. Estimación puntual (Diferencia en Edades Medias: Carolinas - Rocallosas)
+diferencia_edades <- xbar1_edad - xbar2_edad
+cat("Estimación Puntual (Diferencia de Edades Medias, Carolinas - Rocallosas):", diferencia_edades, "años\n")
+
+# 2. Cálculo del Error Estándar de la Diferencia de Medias (EE_diff)
+varianza1 <- s1_edad^2 / n1
+varianza2 <- s2_edad^2 / n2
+ee_diferencia_edades <- sqrt(varianza1 + varianza2)
+cat("Error Estándar (EE_diff) de la diferencia de Edades:", ee_diferencia_edades, "\n")
+
+
+```
+Ahora se ha de incluir las dos desviaciones estándar para el error de estimación:
+```{r}
+# 3. Cálculo del Límite de Error (E)
+# E = Z * EE_diff, donde Z = 2.0
+limite_error_diferencia_edades <- Z * ee_diferencia_edades
+cat("   Límite para el Error de Estimación (E) con 2*EE:", limite_error_diferencia_edades, "años\n")
+
+```
+**Respuestas**
+```{r}
+ic_inferior_edad <- diferencia_edades - limite_error_diferencia_edades
+ic_superior_edad <- diferencia_edades + limite_error_diferencia_edades
+cat(" Con un intervalo de confianza de aproximadamente 95.45%: la diferencia de edad[", round(ic_inferior_edad, 3), ", ", round(ic_superior_edad, 3), "] años\n")
+```
+El hecho de que la diferencia sea negativa no implica que la edad es negativa, solamente interesa la magnitud de este estimador puntual.
+
+c)  Calcule y precise un límite de desviación estándar de 2 en la
     diferencia en proporciones de pacientes con cálculos renales, de las
     Carolinas y las Rocallosas, que eran fumadores en el momento de
     hacer el estudio
+
+
+```{r}
+# 1. Estimación puntual (Diferencia de proporciones: Carolinas - Rocallosas)
+dif_prop_fum <- p1_fumadores - p2_fumadores
+cat("La diferencia de proporciones  es de:", dif_prop_fum)
+```
+
+```{r}
+# 2. Cálculo del Error Estándar de la Diferencia de Proporciones (EE_prop)
+prop1 <- p1_fumadores*(1-p1_fumadores)/n1
+prop2 <- p2_fumadores*(1-p2_fumadores)/n2
+EE_prop <- sqrt(prop1+prop2)
+cat("El Error estándar de la diferencia de proporciones es de", EE_prop)
+```
+
+```{r}
+# 3. Cálculo del Límite de Error (E)
+
+lim_error_diferencia_proporciones <- Z*EE_prop
+cat("El límite de error de diferencia de proporciones es de", lim_error_diferencia_proporciones)
+```
+**Respuestas**
+```{r}
+ic_inferior_prop <- dif_prop_fum - lim_error_diferencia_proporciones
+ic_superior_prop <- dif_prop_fum + lim_error_diferencia_proporciones
+cat(" Con un intervalo de confianza de aproximadamente 95.45%: la diferencia de en proporciones de pacientes que eran fumadores está en el invervalo [", round(ic_inferior_prop, 3), ", ", round(ic_superior_prop, 3), "].\n")
+```
+
 
 ###Problema 2
 
