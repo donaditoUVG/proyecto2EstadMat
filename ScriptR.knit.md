@@ -1,0 +1,475 @@
+---
+title: "Proyecto III - Estadística Matemática"
+author: "José Donado, Ian Castellanos, Joaquín Puente, Micaela Yataz"
+date: "2025-10-08"
+output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+### Problema 1 (17 puntos)
+
+La Agencia de Protección Ambiental en conjunto con la Universidad de
+Florida recientemente realizó un amplio estudio de los posibles efectos
+de trazas de elementos en el agua potable sobre la formación de cálculos
+renales. La tabla siguiente presenta los datos de edad, la cantidad de
+calcio en agua potable (medida en partes por millón) y los hábitos de
+fumar. Estos datos se obtuvieron de individuos con problemas actuales de
+cálculos renales, todos los cuales vivían en las dos Carolinas y en
+estados de las Montañas Rocallosas.
+
+
+```r
+#aqui va la tabla
+```
+
+a)  Estime la concentración promedio de calcio en el agua potable para
+    pacientes con cálculos renales en las Carolinas. Establezca un
+    límite para el error de estimación (2 desviaciones estándar).
+
+Gracias a que se tiene una muestra grande y el parámetro muestral, se
+puede utilizar el Teorema del Límite Central y la distribución normal
+(Z) para calcular el promedio muestral (puntual) con su correspondiente
+intervalo de confianza.
+
+De primero, calcularemos el límite del Error. Este se define como el
+valor crítico (Zα/2​) y el Error Estándar de la Media (σxˉ​).
+
+El Error Estándar de la Media se calcula como
+$\sigma_{\bar{x}} = \frac{s}{\sqrt{n}}$, donde $s$ es la desviación
+estándar muestral y $n$ es el tamaño de la muestra.
+
+Entonces...
+
+a)  Calcule la diferencia en edades medias para pacientes con cálculos
+    renales en las Ca- rolinas y en las Rocallosas. Fije un límite para
+    el error de estimación (2 desviaciones estándar).
+
+b)  Calcule y precise un límite de desviación estándar de 2 en la
+    diferencia en proporciones de pacientes con cálculos renales, de las
+    Carolinas y las Rocallosas, que eran fumadores en el momento de
+    hacer el estudio
+
+###Problema 2
+
+Suponga que Y está distribuida normalmente con media $0$ y varianza
+$\sigma^2$ desconocida. a) Encuentre la distribución de $Y^2/ \sigma^2$.
+¿Por qué? b) Hallar un intervalo de confianza del $95\%$ para
+$\sigma^2$. c) Encontrar un límite de confianza superior de $95\%$ para
+$\sigma^2$. d) Hallar un límite de confianza inferior de $95%$ para
+$\sigma^2$.
+
+###Problema 3
+
+Dos marcas de refrigeradores, denotadas por A y B, están garantizadas
+por 1 año. En una muestra aleatoria de 50 refrigeradores de la marca A,
+se observó que 12 de ellos fallaron antes de terminar el periodo de
+garantía. Una muestra aleatoria independiente de 60 refrigeradores de la
+marca B también reveló 12 fallas durante el período de garantía.
+
+
+```r
+# Datos base
+n1 <- 50; x1 <- 12   # Marca A
+n2 <- 60; x2 <- 12   # Marca B
+
+alpha <- 0.02
+z_crit <- qnorm(1 - alpha/2)  # z_0.99 para 98% de confianza
+
+# Estimadores puntuales
+p1_hat <- x1/n1
+p2_hat <- x2/n2
+diff_hat <- p1_hat - p2_hat
+
+# Error estándar para diferencia de proporciones independientes
+se <- sqrt( p1_hat*(1 - p1_hat)/n1 + p2_hat*(1 - p2_hat)/n2 )
+```
+
+a)  Calcule la diferencia real $(p_1 - p_2)$ entre las proporciones de
+    fallas durante el período de garantía, con un coeficiente de
+    confianza de aproximadamente .98, donde p1 y p2 se usaron para
+    denotar las proporciones de refrigeradores de las marcas A y B,
+    respectivamente, que fallaron durante los períodos de garantía.
+
+
+```r
+ci_low  <- diff_hat - z_crit*se
+ci_high <- diff_hat + z_crit*se
+
+cat("p1_hat =", round(p1_hat, 4), "\n")
+```
+
+```
+## p1_hat = 0.24
+```
+
+```r
+cat("p2_hat =", round(p2_hat, 4), "\n")
+```
+
+```
+## p2_hat = 0.2
+```
+
+```r
+cat("Diferencia puntual (p1 - p2) =", round(diff_hat, 4), "\n")
+```
+
+```
+## Diferencia puntual (p1 - p2) = 0.04
+```
+
+```r
+cat("z_crit (98%) =", round(z_crit, 6), "\n")
+```
+
+```
+## z_crit (98%) = 2.326348
+```
+
+```r
+cat("SE =", round(se, 6), "\n")
+```
+
+```
+## SE = 0.079465
+```
+
+```r
+cat("IC 98% para (p1 - p2): [", round(ci_low, 4), ", ", round(ci_high, 4), "]\n", sep = "")
+```
+
+```
+## IC 98% para (p1 - p2): [-0.1449, 0.2249]
+```
+
+b)  En el nivel aproximado de $98 \%$ de confianza, ¿cuál es el mayor
+    "valor creíble" para la diferencia en las proporciones de fallas de
+    refrigeradores de las marcas A y B?
+
+
+```r
+upper_98 <- ci_high
+cat("Mayor valor creíble (límite superior 98%):", round(upper_98, 4), "\n")
+```
+
+```
+## Mayor valor creíble (límite superior 98%): 0.2249
+```
+
+c)  En el nivel aproximado de $98 \%$ de confianza, ¿cuál es el menor
+    "valor creíble" para la diferencia en las proporciones de fallas de
+    refrigeradores de las marcas A y B?
+
+
+```r
+lower_98 <- ci_low
+cat("Menor valor creíble (límite inferior 98%):", round(lower_98, 4), "\n")
+```
+
+```
+## Menor valor creíble (límite inferior 98%): -0.1449
+```
+
+d)  Si $p_1 - p_2$ es realmente igual a $0.2251$, ¿cuál marca tiene la
+    mayor proporción de fallas durante el período de garantía? ¿Qué
+    tanto más grande?
+
+
+```r
+hyp_diff_d <- 0.2251
+marca_mayor_d <- if (hyp_diff_d > 0) "A" else if (hyp_diff_d < 0) "B" : "Iguales"
+cuanto_mas_d <- abs(hyp_diff_d)
+
+cat("Supuesto p1 - p2 =", hyp_diff_d, "\n")
+```
+
+```
+## Supuesto p1 - p2 = 0.2251
+```
+
+```r
+cat("Marca con mayor proporción de fallas:", marca_mayor_d, "\n")
+```
+
+```
+## Marca con mayor proporción de fallas: A
+```
+
+```r
+cat("Diferencia absoluta:", round(cuanto_mas_d, 4), " (", round(100*cuanto_mas_d, 2), "% puntos)\n", sep = "")
+```
+
+```
+## Diferencia absoluta:0.2251 (22.51% puntos)
+```
+
+e)  Si $p_1 - p_2$ es realmente igual a $-0.1451$, ¿cuál marca tiene la
+    mayor proporción de fallas durante el período de garantía? ¿Qué
+    tanto más grande?
+
+
+```r
+hyp_diff_e <- -0.1451
+marca_mayor_e <- if (hyp_diff_e > 0) "A" else if (hyp_diff_e < 0) "B" else "Iguales"
+cuanto_mas_e <- abs(hyp_diff_e)
+
+cat("Supuesto p1 - p2 =", hyp_diff_e, "\n")
+```
+
+```
+## Supuesto p1 - p2 = -0.1451
+```
+
+```r
+cat("Marca con mayor proporción de fallas:", marca_mayor_e, "\n")
+```
+
+```
+## Marca con mayor proporción de fallas: B
+```
+
+```r
+cat("Diferencia absoluta:", round(cuanto_mas_e, 4), " (", round(100*cuanto_mas_e, 2), "% puntos)\n", sep = "")
+```
+
+```
+## Diferencia absoluta:0.1451 (14.51% puntos)
+```
+
+f)  Como puede observar cero es un valor creíble de la diferencia.
+    ¿Concluiría usted que hay evidencia de una diferencia en las
+    proporciones de fallas (dentro del período de garantía) para las dos
+    marcas de refrigeradores? ¿Por qué?
+
+
+```r
+incluye_cero <- (ci_low <= 0) && (0 <= ci_high)
+cat("IC 98%:", "[", round(ci_low, 4), ", ", round(ci_high, 4), "]\n", sep = "")
+```
+
+```
+## IC 98%:[-0.1449, 0.2249]
+```
+
+```r
+cat("¿El IC incluye 0?:", incluye_cero, "\n")
+```
+
+```
+## ¿El IC incluye 0?: TRUE
+```
+
+```r
+conclusion <- if (incluye_cero) "No hay evidencia suficiente de diferencia al 98%." else "Sí hay evidencia de diferencia al 98%."
+cat("Conclusión:", conclusion, "\n")
+```
+
+```
+## Conclusión: No hay evidencia suficiente de diferencia al 98%.
+```
+
+###Problema 4
+
+Un servicio estatal de fauna silvestre desea calcular el número promedio
+de días que cada cazador con licencia se dedica a esta actividad
+realmente durante una estación determinada, con un límite en el error de
+estimación igual a $2$ días de caza. Si los datos recolectados en
+estudios anteriores han demostrado que s es aproximadamente igual a 10,
+¿cuántos cazadores deben estar incluidos en el estudio?
+
+
+```r
+# Función para calcular tamaño de muestra
+calcular_n <- function(sigma, B, confianza = 0.95) {
+  alpha <- 1 - confianza
+  z <- qnorm(1 - alpha/2)
+  n <- (z * sigma / B)^2
+  return(ceiling(n))  # Redondear hacia arriba
+}
+
+# Parámetros del problema
+sigma <- 10
+B <- 2
+
+# Cálculos para diferentes niveles de confianza
+cat("Tamaño de muestra requerido:\n")
+```
+
+```
+## Tamaño de muestra requerido:
+```
+
+```r
+cat("90% confianza:", calcular_n(sigma, B, 0.90), "cazadores\n")
+```
+
+```
+## 90% confianza: 68 cazadores
+```
+
+```r
+cat("95% confianza:", calcular_n(sigma, B, 0.95), "cazadores\n")
+```
+
+```
+## 95% confianza: 97 cazadores
+```
+
+```r
+cat("99% confianza:", calcular_n(sigma, B, 0.99), "cazadores\n")
+```
+
+```
+## 99% confianza: 166 cazadores
+```
+
+###Problema 5
+
+La Agencia de Protección Ambiental ha recolectado datos sobre mediciones
+de $LC50$ (concentraciones que matan a $50 \%$ de los animales de
+prueba) para ciertos productos químicos que es probable se encuentren en
+ríos y lagos de agua dulce. Para cierta especie de peces, las mediciones
+de LC50 (en partes por millón) de DDT en 12 experimentos fueron las
+siguientes:
+
+$$16, 5, 21, 19, 10, 5, 8, 2, 7, 2, 4, 9$$
+
+Calcule la media real de LC50 para DDT con un coeficiente de confianza
+$0.90$. Suponga que las mediciones de LC50 tienen una distribución
+aproximadamente normal.
+
+**Respuesta:**
+
+
+```r
+# Datos
+datos <- c(16, 5, 21, 19, 10, 5, 8, 2, 7, 2, 4, 9)
+
+# Parámetros
+n <- length(datos)
+confianza <- 0.90
+alpha <- 1 - confianza
+# Realizar prueba t (solo para obtener el IC)
+resultado <- t.test(datos, conf.level = confianza)
+
+# Mostrar resultados
+print(resultado)
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  datos
+## t = 4.8529, df = 11, p-value = 0.0005084
+## alternative hypothesis: true mean is not equal to 0
+## 90 percent confidence interval:
+##   5.669423 12.330577
+## sample estimates:
+## mean of x 
+##         9
+```
+
+```r
+cat("\nIntervalo de confianza al ", confianza*100, "%:\n", sep = "")
+```
+
+```
+## 
+## Intervalo de confianza al 90%:
+```
+
+```r
+cat("IC(μ) = [", round(resultado$conf.int[1], 3), ", ", 
+    round(resultado$conf.int[2], 3), "] ppm\n", sep = "")
+```
+
+```
+## IC(μ) = [5.669, 12.331] ppm
+```
+
+###Problema 6
+
+Se encontrará que, con probabilidad en la cercanía de $0.95$, muchas
+variables aleatorias observadas en la naturaleza se encuentran a no más
+de $2$ desviaciones estándar de sus medias
+
+a)  Calcule la $P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)$, donde Y tiene una
+    distribución Normal con media $\mu$ y varianza $\sigma^2$.
+
+
+```r
+# Para Normal, estandarizamos: Z = (Y - μ)/σ ~ N(0,1)
+# Entonces P(μ-2σ <= Y <= μ+2σ) = P(-2 <= Z <= 2) = Φ(2) - Φ(-2)
+prob_normal <- pnorm(2) - pnorm(-2)
+prob_normal
+```
+
+```
+## [1] 0.9544997
+```
+
+b)  Calcule la $P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)$, donde Y tiene una
+    distribución Uniforme en el intervalo $(a,b)$.
+
+
+```r
+# Para Uniforme(a,b): μ=(a+b)/2 y σ=(b-a)/sqrt(12)
+# El intervalo μ ± 2σ tiene semiamplitud (b-a)/√3, que es mayor que (b-a)/2.
+# Por lo tanto, cubre completamente [a,b] y la probabilidad es 1.
+prob_uniform <- 1
+prob_uniform
+```
+
+```
+## [1] 1
+```
+
+c)  Calcule la $P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)$, donde Y tiene una
+    distribución exponcial con parámetro $\beta$.
+
+
+```r
+# Convención: Usamos parámetro β como *escala*: μ=β, σ=β.
+# Entonces μ - 2σ = -β (truncado en 0 porque Y>=0) y μ + 2σ = 3β.
+# P = P(0 <= Y <= 3β) = 1 - exp(-3β/β) = 1 - e^{-3}.
+prob_exp <- 1 - exp(-3)
+prob_exp
+```
+
+```
+## [1] 0.9502129
+```
+
+d)  Los incisos anteriores, cumplen la desigualdad de Chebyshef.
+    Explique
+
+
+```r
+k <- 2
+chebyshev_bound <- 1 - 1/k^2  # 1 - 1/4 = 3/4
+cota_chebyshev <- chebyshev_bound
+
+resumen <- data.frame(
+  Distribucion = c("Normal(μ,σ^2)", "Uniforme(a,b)", "Exponencial(β, escala)"),
+  Prob_dentro_2sigma = c(prob_normal, prob_uniform, prob_exp),
+  Cota_Chebyshev_k2 = rep(cota_chebyshev, 3)
+)
+resumen
+```
+
+```
+##             Distribucion Prob_dentro_2sigma Cota_Chebyshev_k2
+## 1          Normal(μ,σ^2)          0.9544997              0.75
+## 2          Uniforme(a,b)          1.0000000              0.75
+## 3 Exponencial(β, escala)          0.9502129              0.75
+```
+
+La desigualdad de Chebyshev dice, para cualquier v.a. con media y
+varianza finitas, que $$P(|Y-\mu| \leq k\sigma) \geq 1 - \frac{1}{k^2}$$
+
+.

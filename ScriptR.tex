@@ -1,0 +1,695 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Proyecto III - Estadística Matemática},
+  pdfauthor={José Donado, Ian Castellanos, Joaquín Puente, Micaela Yataz},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Proyecto III - Estadística Matemática}
+\author{José Donado, Ian Castellanos, Joaquín Puente, Micaela Yataz}
+\date{2025-10-08}
+
+\begin{document}
+\maketitle
+
+\hypertarget{problema-1-17-puntos}{%
+\subsubsection{Problema 1 (17 puntos)}\label{problema-1-17-puntos}}
+
+La Agencia de Protección Ambiental en conjunto con la Universidad de
+Florida recientemente realizó un amplio estudio de los posibles efectos
+de trazas de elementos en el agua potable sobre la formación de cálculos
+renales. La tabla siguiente presenta los datos de edad, la cantidad de
+calcio en agua potable (medida en partes por millón) y los hábitos de
+fumar. Estos datos se obtuvieron de individuos con problemas actuales de
+cálculos renales, todos los cuales vivían en las dos Carolinas y en
+estados de las Montañas Rocallosas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#aqui va la tabla}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Estime la concentración promedio de calcio en el agua potable para
+  pacientes con cálculos renales en las Carolinas. Establezca un límite
+  para el error de estimación (2 desviaciones estándar).
+\end{enumerate}
+
+Gracias a que se tiene una muestra grande y el parámetro muestral, se
+puede utilizar el Teorema del Límite Central y la distribución normal
+(Z) para calcular el promedio muestral (puntual) con su correspondiente
+intervalo de confianza.
+
+De primero, calcularemos el límite del Error. Este se define como el
+valor crítico (Zα/2\hspace{0pt}) y el Error Estándar de la Media
+(σxˉ\hspace{0pt}).
+
+El Error Estándar de la Media se calcula como
+\(\sigma_{\bar{x}} = \frac{s}{\sqrt{n}}\), donde \(s\) es la desviación
+estándar muestral y \(n\) es el tamaño de la muestra.
+
+Entonces\ldots{}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Calcule la diferencia en edades medias para pacientes con cálculos
+  renales en las Ca- rolinas y en las Rocallosas. Fije un límite para el
+  error de estimación (2 desviaciones estándar).
+\item
+  Calcule y precise un límite de desviación estándar de 2 en la
+  diferencia en proporciones de pacientes con cálculos renales, de las
+  Carolinas y las Rocallosas, que eran fumadores en el momento de hacer
+  el estudio
+\end{enumerate}
+
+\#\#\#Problema 2
+
+Suponga que Y está distribuida normalmente con media \(0\) y varianza
+\(\sigma^2\) desconocida. a) Encuentre la distribución de
+\(Y^2/ \sigma^2\). ¿Por qué? b) Hallar un intervalo de confianza del
+\(95\%\) para \(\sigma^2\). c) Encontrar un límite de confianza superior
+de \(95\%\) para \(\sigma^2\). d) Hallar un límite de confianza inferior
+de \(95%
+\) para \(\sigma^2\).
+
+\#\#\#Problema 3
+
+Dos marcas de refrigeradores, denotadas por A y B, están garantizadas
+por 1 año. En una muestra aleatoria de 50 refrigeradores de la marca A,
+se observó que 12 de ellos fallaron antes de terminar el periodo de
+garantía. Una muestra aleatoria independiente de 60 refrigeradores de la
+marca B también reveló 12 fallas durante el período de garantía.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Datos base}
+\NormalTok{n1 }\OtherTok{\textless{}{-}} \DecValTok{50}\NormalTok{; x1 }\OtherTok{\textless{}{-}} \DecValTok{12}   \CommentTok{\# Marca A}
+\NormalTok{n2 }\OtherTok{\textless{}{-}} \DecValTok{60}\NormalTok{; x2 }\OtherTok{\textless{}{-}} \DecValTok{12}   \CommentTok{\# Marca B}
+
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.02}
+\NormalTok{z\_crit }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)  }\CommentTok{\# z\_0.99 para 98\% de confianza}
+
+\CommentTok{\# Estimadores puntuales}
+\NormalTok{p1\_hat }\OtherTok{\textless{}{-}}\NormalTok{ x1}\SpecialCharTok{/}\NormalTok{n1}
+\NormalTok{p2\_hat }\OtherTok{\textless{}{-}}\NormalTok{ x2}\SpecialCharTok{/}\NormalTok{n2}
+\NormalTok{diff\_hat }\OtherTok{\textless{}{-}}\NormalTok{ p1\_hat }\SpecialCharTok{{-}}\NormalTok{ p2\_hat}
+
+\CommentTok{\# Error estándar para diferencia de proporciones independientes}
+\NormalTok{se }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{( p1\_hat}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p1\_hat)}\SpecialCharTok{/}\NormalTok{n1 }\SpecialCharTok{+}\NormalTok{ p2\_hat}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p2\_hat)}\SpecialCharTok{/}\NormalTok{n2 )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Calcule la diferencia real \((p_1 - p_2)\) entre las proporciones de
+  fallas durante el período de garantía, con un coeficiente de confianza
+  de aproximadamente .98, donde p1 y p2 se usaron para denotar las
+  proporciones de refrigeradores de las marcas A y B, respectivamente,
+  que fallaron durante los períodos de garantía.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ci\_low  }\OtherTok{\textless{}{-}}\NormalTok{ diff\_hat }\SpecialCharTok{{-}}\NormalTok{ z\_crit}\SpecialCharTok{*}\NormalTok{se}
+\NormalTok{ci\_high }\OtherTok{\textless{}{-}}\NormalTok{ diff\_hat }\SpecialCharTok{+}\NormalTok{ z\_crit}\SpecialCharTok{*}\NormalTok{se}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"p1\_hat ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(p1\_hat, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## p1_hat = 0.24
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"p2\_hat ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(p2\_hat, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## p2_hat = 0.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Diferencia puntual (p1 {-} p2) ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(diff\_hat, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Diferencia puntual (p1 - p2) = 0.04
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"z\_crit (98\%) ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(z\_crit, }\DecValTok{6}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## z_crit (98%) = 2.326348
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"SE ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(se, }\DecValTok{6}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## SE = 0.079465
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"IC 98\% para (p1 {-} p2): ["}\NormalTok{, }\FunctionTok{round}\NormalTok{(ci\_low, }\DecValTok{4}\NormalTok{), }\StringTok{", "}\NormalTok{, }\FunctionTok{round}\NormalTok{(ci\_high, }\DecValTok{4}\NormalTok{), }\StringTok{"]}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## IC 98% para (p1 - p2): [-0.1449, 0.2249]
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  En el nivel aproximado de \(98 \%\) de confianza, ¿cuál es el mayor
+  ``valor creíble'' para la diferencia en las proporciones de fallas de
+  refrigeradores de las marcas A y B?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{upper\_98 }\OtherTok{\textless{}{-}}\NormalTok{ ci\_high}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Mayor valor creíble (límite superior 98\%):"}\NormalTok{, }\FunctionTok{round}\NormalTok{(upper\_98, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Mayor valor creíble (límite superior 98%): 0.2249
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  En el nivel aproximado de \(98 \%\) de confianza, ¿cuál es el menor
+  ``valor creíble'' para la diferencia en las proporciones de fallas de
+  refrigeradores de las marcas A y B?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lower\_98 }\OtherTok{\textless{}{-}}\NormalTok{ ci\_low}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Menor valor creíble (límite inferior 98\%):"}\NormalTok{, }\FunctionTok{round}\NormalTok{(lower\_98, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Menor valor creíble (límite inferior 98%): -0.1449
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Si \(p_1 - p_2\) es realmente igual a \(0.2251\), ¿cuál marca tiene la
+  mayor proporción de fallas durante el período de garantía? ¿Qué tanto
+  más grande?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hyp\_diff\_d }\OtherTok{\textless{}{-}} \FloatTok{0.2251}
+\NormalTok{marca\_mayor\_d }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{ (hyp\_diff\_d }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\StringTok{"A"} \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (hyp\_diff\_d }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\StringTok{"B"} \SpecialCharTok{:} \StringTok{"Iguales"}
+\NormalTok{cuanto\_mas\_d }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(hyp\_diff\_d)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Supuesto p1 {-} p2 ="}\NormalTok{, hyp\_diff\_d, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Supuesto p1 - p2 = 0.2251
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Marca con mayor proporción de fallas:"}\NormalTok{, marca\_mayor\_d, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Marca con mayor proporción de fallas: A
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Diferencia absoluta:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(cuanto\_mas\_d, }\DecValTok{4}\NormalTok{), }\StringTok{" ("}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\NormalTok{cuanto\_mas\_d, }\DecValTok{2}\NormalTok{), }\StringTok{"\% puntos)}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Diferencia absoluta:0.2251 (22.51% puntos)
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Si \(p_1 - p_2\) es realmente igual a \(-0.1451\), ¿cuál marca tiene
+  la mayor proporción de fallas durante el período de garantía? ¿Qué
+  tanto más grande?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hyp\_diff\_e }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FloatTok{0.1451}
+\NormalTok{marca\_mayor\_e }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{ (hyp\_diff\_e }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\StringTok{"A"} \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (hyp\_diff\_e }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\StringTok{"B"} \ControlFlowTok{else} \StringTok{"Iguales"}
+\NormalTok{cuanto\_mas\_e }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(hyp\_diff\_e)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Supuesto p1 {-} p2 ="}\NormalTok{, hyp\_diff\_e, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Supuesto p1 - p2 = -0.1451
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Marca con mayor proporción de fallas:"}\NormalTok{, marca\_mayor\_e, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Marca con mayor proporción de fallas: B
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Diferencia absoluta:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(cuanto\_mas\_e, }\DecValTok{4}\NormalTok{), }\StringTok{" ("}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\NormalTok{cuanto\_mas\_e, }\DecValTok{2}\NormalTok{), }\StringTok{"\% puntos)}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Diferencia absoluta:0.1451 (14.51% puntos)
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Como puede observar cero es un valor creíble de la diferencia.
+  ¿Concluiría usted que hay evidencia de una diferencia en las
+  proporciones de fallas (dentro del período de garantía) para las dos
+  marcas de refrigeradores? ¿Por qué?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{incluye\_cero }\OtherTok{\textless{}{-}}\NormalTok{ (ci\_low }\SpecialCharTok{\textless{}=} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\&\&}\NormalTok{ (}\DecValTok{0} \SpecialCharTok{\textless{}=}\NormalTok{ ci\_high)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"IC 98\%:"}\NormalTok{, }\StringTok{"["}\NormalTok{, }\FunctionTok{round}\NormalTok{(ci\_low, }\DecValTok{4}\NormalTok{), }\StringTok{", "}\NormalTok{, }\FunctionTok{round}\NormalTok{(ci\_high, }\DecValTok{4}\NormalTok{), }\StringTok{"]}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## IC 98%:[-0.1449, 0.2249]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"¿El IC incluye 0?:"}\NormalTok{, incluye\_cero, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ¿El IC incluye 0?: TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{conclusion }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{ (incluye\_cero) }\StringTok{"No hay evidencia suficiente de diferencia al 98\%."} \ControlFlowTok{else} \StringTok{"Sí hay evidencia de diferencia al 98\%."}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Conclusión:"}\NormalTok{, conclusion, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Conclusión: No hay evidencia suficiente de diferencia al 98%.
+\end{verbatim}
+
+\#\#\#Problema 4
+
+Un servicio estatal de fauna silvestre desea calcular el número promedio
+de días que cada cazador con licencia se dedica a esta actividad
+realmente durante una estación determinada, con un límite en el error de
+estimación igual a \(2\) días de caza. Si los datos recolectados en
+estudios anteriores han demostrado que s es aproximadamente igual a 10,
+¿cuántos cazadores deben estar incluidos en el estudio?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Función para calcular tamaño de muestra}
+\NormalTok{calcular\_n }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(sigma, B, }\AttributeTok{confianza =} \FloatTok{0.95}\NormalTok{) \{}
+\NormalTok{  alpha }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ confianza}
+\NormalTok{  z }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{  n }\OtherTok{\textless{}{-}}\NormalTok{ (z }\SpecialCharTok{*}\NormalTok{ sigma }\SpecialCharTok{/}\NormalTok{ B)}\SpecialCharTok{\^{}}\DecValTok{2}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{ceiling}\NormalTok{(n))  }\CommentTok{\# Redondear hacia arriba}
+\NormalTok{\}}
+
+\CommentTok{\# Parámetros del problema}
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{2}
+
+\CommentTok{\# Cálculos para diferentes niveles de confianza}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Tamaño de muestra requerido:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tamaño de muestra requerido:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"90\% confianza:"}\NormalTok{, }\FunctionTok{calcular\_n}\NormalTok{(sigma, B, }\FloatTok{0.90}\NormalTok{), }\StringTok{"cazadores}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 90% confianza: 68 cazadores
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"95\% confianza:"}\NormalTok{, }\FunctionTok{calcular\_n}\NormalTok{(sigma, B, }\FloatTok{0.95}\NormalTok{), }\StringTok{"cazadores}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 95% confianza: 97 cazadores
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"99\% confianza:"}\NormalTok{, }\FunctionTok{calcular\_n}\NormalTok{(sigma, B, }\FloatTok{0.99}\NormalTok{), }\StringTok{"cazadores}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 99% confianza: 166 cazadores
+\end{verbatim}
+
+\#\#\#Problema 5
+
+La Agencia de Protección Ambiental ha recolectado datos sobre mediciones
+de \(LC50\) (concentraciones que matan a \(50 \%\) de los animales de
+prueba) para ciertos productos químicos que es probable se encuentren en
+ríos y lagos de agua dulce. Para cierta especie de peces, las mediciones
+de LC50 (en partes por millón) de DDT en 12 experimentos fueron las
+siguientes:
+
+\[16, 5, 21, 19, 10, 5, 8, 2, 7, 2, 4, 9\]
+
+Calcule la media real de LC50 para DDT con un coeficiente de confianza
+\(0.90\). Suponga que las mediciones de LC50 tienen una distribución
+aproximadamente normal.
+
+\textbf{Respuesta:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Datos}
+\NormalTok{datos }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+
+\CommentTok{\# Parámetros}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(datos)}
+\NormalTok{confianza }\OtherTok{\textless{}{-}} \FloatTok{0.90}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ confianza}
+\CommentTok{\# Realizar prueba t (solo para obtener el IC)}
+\NormalTok{resultado }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(datos, }\AttributeTok{conf.level =}\NormalTok{ confianza)}
+
+\CommentTok{\# Mostrar resultados}
+\FunctionTok{print}\NormalTok{(resultado)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  datos
+## t = 4.8529, df = 11, p-value = 0.0005084
+## alternative hypothesis: true mean is not equal to 0
+## 90 percent confidence interval:
+##   5.669423 12.330577
+## sample estimates:
+## mean of x 
+##         9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Intervalo de confianza al "}\NormalTok{, confianza}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\StringTok{"\%:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Intervalo de confianza al 90%:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"IC(μ) = ["}\NormalTok{, }\FunctionTok{round}\NormalTok{(resultado}\SpecialCharTok{$}\NormalTok{conf.int[}\DecValTok{1}\NormalTok{], }\DecValTok{3}\NormalTok{), }\StringTok{", "}\NormalTok{, }
+    \FunctionTok{round}\NormalTok{(resultado}\SpecialCharTok{$}\NormalTok{conf.int[}\DecValTok{2}\NormalTok{], }\DecValTok{3}\NormalTok{), }\StringTok{"] ppm}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## IC(μ) = [5.669, 12.331] ppm
+\end{verbatim}
+
+\#\#\#Problema 6
+
+Se encontrará que, con probabilidad en la cercanía de \(0.95\), muchas
+variables aleatorias observadas en la naturaleza se encuentran a no más
+de \(2\) desviaciones estándar de sus medias
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Calcule la \(P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)\), donde Y tiene una
+  distribución Normal con media \(\mu\) y varianza \(\sigma^2\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Para Normal, estandarizamos: Z = (Y {-} μ)/σ \textasciitilde{} N(0,1)}
+\CommentTok{\# Entonces P(μ{-}2σ \textless{}= Y \textless{}= μ+2σ) = P({-}2 \textless{}= Z \textless{}= 2) = Φ(2) {-} Φ({-}2)}
+\NormalTok{prob\_normal }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(}\DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)}
+\NormalTok{prob\_normal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9544997
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calcule la \(P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)\), donde Y tiene una
+  distribución Uniforme en el intervalo \((a,b)\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Para Uniforme(a,b): μ=(a+b)/2 y σ=(b{-}a)/sqrt(12)}
+\CommentTok{\# El intervalo μ ± 2σ tiene semiamplitud (b{-}a)/√3, que es mayor que (b{-}a)/2.}
+\CommentTok{\# Por lo tanto, cubre completamente [a,b] y la probabilidad es 1.}
+\NormalTok{prob\_uniform }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{prob\_uniform}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Calcule la \(P(\mu − 2\sigma ≤ Y ≤ \mu + 2\sigma)\), donde Y tiene una
+  distribución exponcial con parámetro \(\beta\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convención: Usamos parámetro β como *escala*: μ=β, σ=β.}
+\CommentTok{\# Entonces μ {-} 2σ = {-}β (truncado en 0 porque Y\textgreater{}=0) y μ + 2σ = 3β.}
+\CommentTok{\# P = P(0 \textless{}= Y \textless{}= 3β) = 1 {-} exp({-}3β/β) = 1 {-} e\^{}\{{-}3\}.}
+\NormalTok{prob\_exp }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{)}
+\NormalTok{prob\_exp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9502129
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Los incisos anteriores, cumplen la desigualdad de Chebyshef. Explique
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{chebyshev\_bound }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{k}\SpecialCharTok{\^{}}\DecValTok{2}  \CommentTok{\# 1 {-} 1/4 = 3/4}
+\NormalTok{cota\_chebyshev }\OtherTok{\textless{}{-}}\NormalTok{ chebyshev\_bound}
+
+\NormalTok{resumen }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Distribucion =} \FunctionTok{c}\NormalTok{(}\StringTok{"Normal(μ,σ\^{}2)"}\NormalTok{, }\StringTok{"Uniforme(a,b)"}\NormalTok{, }\StringTok{"Exponencial(β, escala)"}\NormalTok{),}
+  \AttributeTok{Prob\_dentro\_2sigma =} \FunctionTok{c}\NormalTok{(prob\_normal, prob\_uniform, prob\_exp),}
+  \AttributeTok{Cota\_Chebyshev\_k2 =} \FunctionTok{rep}\NormalTok{(cota\_chebyshev, }\DecValTok{3}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{resumen}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Distribucion Prob_dentro_2sigma Cota_Chebyshev_k2
+## 1          Normal(μ,σ^2)          0.9544997              0.75
+## 2          Uniforme(a,b)          1.0000000              0.75
+## 3 Exponencial(β, escala)          0.9502129              0.75
+\end{verbatim}
+
+La desigualdad de Chebyshev dice, para cualquier v.a. con media y
+varianza finitas, que \[P(|Y-\mu| \leq k\sigma) \geq 1 - \frac{1}{k^2}\]
+
+.
+
+\end{document}
